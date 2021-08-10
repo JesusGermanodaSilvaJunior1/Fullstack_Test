@@ -10,6 +10,11 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    protected $dates = ['created_at' , 'updated_at'];
+
+    public function getAuthPassword() {
+        return $this->senha;
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -17,9 +22,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'nome',
         'email',
-        'password',
+        'senha',
     ];
 
     /**
@@ -28,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
+        'senha',
         'remember_token',
     ];
 

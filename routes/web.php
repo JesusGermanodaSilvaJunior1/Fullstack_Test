@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/', "HomeController@index")->name('login');
+Route::post('/login', "HomeController@login");
+
+Route::group(['middlewere'=>['auth']], function(){
+
+    Route::get('/logout' , function(){
+
+        Auth::logout();
+        return redirect()->route('login');
+    });
+
+    Route::get('/painel' , "HomeController@painel")->name('painel');
 });
+
